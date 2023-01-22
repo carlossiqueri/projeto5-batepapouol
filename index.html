@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,21 +16,46 @@
   </head>
   <body>
     <header>
-      <img src="./assets/img/logo 1.svg" alt="" />
-      <ion-icon name="people"></ion-icon>
+        <div class="hidden">
+            <img src="./assets/img/logo1.svg" alt="" />
+            <ion-icon name="people"></ion-icon>
+        </div>
+
     </header>
-    <main></main>
+    <main>
+        
+        <img src="./assets/img/logo2.svg" alt="">
+
+        <input type="text" placeholder="Digite seu nome">
+        <button onclick="user(this)">Entrar</button>
+
+        <div class="loading hidden">
+            <img src="https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif" alt="">
+            <p>Entrando...</p>
+        </div>
+
+        <div class="messageLog hidden">
+        </div>
+    </main>
     <footer>
-      <input type="text" placeholder="Escreva aqui..." />
-      <button onclick="send()"><ion-icon name="paper-plane-outline"></ion-icon></button>
+      <div class="hidden">
+        <input type="text" placeholder="Escreva aqui..." />
+        <button onclick="send(this)">
+          <ion-icon name="paper-plane-outline"></ion-icon>
+        </button>
     </footer>
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
     ></script>
+
     <script
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="./assets/script.js"></script>
   </body>
 </html>
