@@ -40,8 +40,6 @@ function serverName() {
 function serverPosResponse(response) {
   console.log(response.data);
   users = userName;
-  getMessages();
-  showServerMessages();
 }
 
 function serverError(erro) {
@@ -64,6 +62,8 @@ function verifyLogin() {
 
 function loginStatusResponse(response) {
   console.log(response.data);
+  getMessages();
+  showServerMessages();
 }
 
 function loginStatusError(erro) {
@@ -156,7 +156,8 @@ function user(entrar) {
   getUserName();
 
   serverName();
-
+  verifyLogin();
+  getMessages();
   setInterval(verifyLogin, 5000);
   setInterval(recarregaChat, 3000);
   removeStartscreen();
@@ -165,7 +166,7 @@ function user(entrar) {
 
   setTimeout(loadingScreenOff, 2000);
   setTimeout(messageContainer, 2000);
-  getMessages();
+  
   showServerMessages();
   recarregaChat();
 }
