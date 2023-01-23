@@ -166,12 +166,12 @@ function user(entrar) {
   loadingScreenOn();
 
   getMessages();
+  
   setTimeout(loadingScreenOff, 2000);
   setTimeout(messageContainer, 2000);
 
   setInterval(verifyLogin, 5000);
   setInterval(recarregaChat, 3000);
-  recarregaChat();
 }
 
 // funçao ao enviar mensagem
@@ -198,15 +198,12 @@ function send(sendMessage) {
     "https://mock-api.driven.com.br/api/v6/uol/messages",
     newMessage
   );
-  promise.then(sendMessageResponse);
+  promise.then(recarregaChat);
   promise.catch(sendMessageError);
 }
-
-function sendMessageResponse(response) {
-  getMessages();
-  showServerMessages();
+// function sendMessageResponse(response) {
   
-}
+// }
 
 function sendMessageError(error) {
   window.location.reload();
