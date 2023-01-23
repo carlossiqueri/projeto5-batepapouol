@@ -67,6 +67,7 @@ function loginStatusResponse(response) {
 }
 
 function loginStatusError(erro) {
+  alert('Você foi desconectado. Por favor, faça login novamente para continuar a enviar mensagens.')
   document.location.reload(true);
 }
 
@@ -101,9 +102,8 @@ function getMessages() {
 }
 
 function serverMessagesResponse(messageResponse) {
-console.log('mensagens retiradas do servidor');
-messages = messageResponse.data;
-
+  console.log("mensagens retiradas do servidor");
+  messages = messageResponse.data;
 }
 
 function serverMessagesError(erro) {
@@ -116,33 +116,39 @@ function showServerMessages() {
   chat.innerHTML = "";
   for (let i = 0; i < messages.length; i++) {
     let from = messages[i].from;
-    let to = messages[i].to;
+    let to = messages[i].to = 'Todos';
     let text = messages[i].text;
     let type = messages[i].type;
     let time = messages[i].time;
 
-    if (type === 'status'){
-        let template =
-         `
+    if (type === "status") {
+      let template = `
          <li class="status" data-test="message"><p>
-         <span class="timer">(${time})</span> &nbsp&nbsp <strong>${from}</strong>&nbsp ${text}
+         <span class="timer">(${time})</span> &nbsp <strong>${from}</strong>&nbsp ${text}
          </p>
          </li>
-         `
+         `;
 
-         chat.innerHTML += template;
-    }else if(type === 'message'){
-        let template = 
-        `
+      chat.innerHTML += template;
+    } else if (type === "message") {
+      let template = `
         <li class="message" data-test="message"><p>
-         <span class="timer">(${time})</span> &nbsp&nbsp <strong>${from}</strong>&nbsp para&nbsp <strong>${to}</strong>:&nbsp ${text}
+         <span class="timer">(${time})</span> &nbsp <strong>${from}</strong>&nbsp para&nbsp <strong>${to}</strong>:&nbsp ${text}
          </p>
          </li>
-        ` 
+        `;
 
-        chat.innerHTML += template;
+      chat.innerHTML += template;
     }
   }
+  chat.lastElementChild.scrollIntoView();
+}
+getMessages();
+
+function recarregaChat() {
+  getMessages();
+  showServerMessages();
+  console.log('recarregou');
 }
 
 // função de clique no botão da tela de login
@@ -152,7 +158,7 @@ function user(entrar) {
   serverName();
 
   setInterval(verifyLogin, 5000);
-
+  // setInterval(recarregaChat, 3000);
   removeStartscreen();
 
   loadingScreenOn();
@@ -160,13 +166,23 @@ function user(entrar) {
   setTimeout(loadingScreenOff, 2000);
   setTimeout(messageContainer, 2000);
 
+  getMessages();
+  showServerMessages();
 }
 
 // funçao ao enviar mensagem
+document
+  .querySelector("footer input")
+  .addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      send();
+    }
+  });
 
 function send(sendMessage) {
   getUserName();
-  const messageTyped = document.querySelector("footer input").value;
+  let messageTyped = document.querySelector("footer input").value;
   let newMessage = {
     from: userName.name,
     to: "Todos",
@@ -188,5 +204,5 @@ function sendMessageResponse(response) {
 }
 
 function sendMessageError(error) {
-  console.log(error.response.status);
+  window.location.reload();
 }
