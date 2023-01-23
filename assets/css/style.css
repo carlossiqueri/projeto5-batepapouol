@@ -39,6 +39,8 @@ header ion-icon {
 }
 
 main {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: calc(667px - 160px);
 }

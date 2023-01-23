@@ -1,8 +1,13 @@
+let users = [];
+let messages = [];
+let userName;
+
 function serverPosResponse (response){
     console.log(response.data);
+    users = userName;
 }
 
-function serverBadResponse (erro){
+function serverError (erro){
     console.log(erro);
     if (erro.response.status == '400'){
         alert('Nome de usuário já está em uso! \nInsira um nome válido.')
@@ -17,18 +22,33 @@ document.querySelector('main input').addEventListener('keydown', function(e){
     }
 })
 
+function loginStatusResponse(response){
+    console.log(response.data);
+}
+
+function loginStatusError(erro){
+    document.location.reload(true);
+}
+
+
 function user(entrar) {
     const logoInicial = document.querySelector('main img');
     const inputInicial = document.querySelector('main input');
     const buttonInicial = document.querySelector('main button');
 
+    userName = {name: inputInicial.value};
 
-
-    const userName = {name:inputInicial.value}
-    
     const promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants ', userName);
     promise.then(serverPosResponse);
-    promise.catch(serverBadResponse);
+    promise.catch(serverError);
+
+    function verifyLogin (){
+        const loginStatus = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', userName);
+        loginStatus.then(loginStatusResponse);
+        loginStatus.catch(loginStatusError); 
+    }
+    
+    setInterval(verifyLogin, 5000);
 
     logoInicial.classList.add('hidden');
     inputInicial.classList.add('hidden');
@@ -58,6 +78,7 @@ function user(entrar) {
         logs.classList.remove('hidden');
         messages.classList.remove('hidden');
 }
+
 }
 
 function send(sendMessage) {
