@@ -153,7 +153,6 @@ function showServerMessages() {
 
 function recarregaChat() {
   getMessages();
-  showServerMessages();
   console.log('recarregou');
 }
 
