@@ -158,16 +158,16 @@ function user(entrar) {
   serverName();
 
   setInterval(verifyLogin, 5000);
-  // setInterval(recarregaChat, 3000);
+  setInterval(recarregaChat, 3000);
   removeStartscreen();
 
   loadingScreenOn();
 
   setTimeout(loadingScreenOff, 2000);
   setTimeout(messageContainer, 2000);
-
   getMessages();
   showServerMessages();
+  recarregaChat();
 }
 
 // funçao ao enviar mensagem
