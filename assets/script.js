@@ -62,8 +62,6 @@ function verifyLogin() {
 
 function loginStatusResponse(response) {
   console.log(response.data);
-  getMessages();
-  showServerMessages();
 }
 
 function loginStatusError(erro) {
@@ -104,6 +102,7 @@ function getMessages() {
 function serverMessagesResponse(messageResponse) {
   console.log("mensagens retiradas do servidor");
   messages = messageResponse.data;
+  showServerMessages();
 }
 
 function serverMessagesError(erro) {
@@ -154,20 +153,17 @@ function recarregaChat() {
 // função de clique no botão da tela de login
 function user(entrar) {
   getUserName();
-
   serverName();
-  verifyLogin();
-  getMessages();
-  setInterval(verifyLogin, 5000);
-  setInterval(recarregaChat, 3000);
-  removeStartscreen();
 
+  removeStartscreen();
   loadingScreenOn();
 
+  getMessages();
   setTimeout(loadingScreenOff, 2000);
   setTimeout(messageContainer, 2000);
-  
-  showServerMessages();
+
+  setInterval(verifyLogin, 5000);
+  setInterval(recarregaChat, 3000);
   recarregaChat();
 }
 
