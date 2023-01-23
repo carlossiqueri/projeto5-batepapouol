@@ -41,6 +41,7 @@ function serverPosResponse(response) {
   console.log(response.data);
   users = userName;
   getMessages();
+  showServerMessages();
 }
 
 function serverError(erro) {
@@ -99,9 +100,10 @@ function getMessages() {
   serverMessages.catch(serverMessagesError);
 }
 
-function serverMessagesResponse(response) {
-messages.push(response.data);
-// showServerMessages();
+function serverMessagesResponse(messageResponse) {
+console.log('mensagens retiradas do servidor');
+messages = messageResponse.data;
+
 }
 
 function serverMessagesError(erro) {
@@ -109,11 +111,37 @@ function serverMessagesError(erro) {
 }
 
 // Adicionando as mensagens a tela de mensagens
-let chat = document.querySelector(".messageLog ul");
+let chat = document.querySelector(".chat");
 function showServerMessages() {
   chat.innerHTML = "";
   for (let i = 0; i < messages.length; i++) {
-    console.log(messages[i]);
+    let from = messages[i].from;
+    let to = messages[i].to;
+    let text = messages[i].text;
+    let type = messages[i].type;
+    let time = messages[i].time;
+
+    if (type === 'status'){
+        let template =
+         `
+         <li class="status" data-test="message"><p>
+         <span class="timer">(${time})</span> &nbsp&nbsp <strong>${from}</strong>&nbsp ${text}
+         </p>
+         </li>
+         `
+
+         chat.innerHTML += template;
+    }else if(type === 'message'){
+        let template = 
+        `
+        <li class="message" data-test="message"><p>
+         <span class="timer">(${time})</span> &nbsp&nbsp <strong>${from}</strong>&nbsp para&nbsp <strong>${to}</strong>:&nbsp ${text}
+         </p>
+         </li>
+        ` 
+
+        chat.innerHTML += template;
+    }
   }
 }
 
@@ -122,7 +150,7 @@ function user(entrar) {
   getUserName();
 
   serverName();
-  getMessages();
+
   setInterval(verifyLogin, 5000);
 
   removeStartscreen();
@@ -156,6 +184,7 @@ function send(sendMessage) {
 
 function sendMessageResponse(response) {
   getMessages();
+  showServerMessages();
 }
 
 function sendMessageError(error) {

@@ -6,6 +6,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 375px;
+    height: 667px;
 }
 
 .hidden {
@@ -42,7 +43,7 @@ main {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: calc(667px - 160px);
+    max-height: calc(667px - 160px);
 }
 
 main img {
@@ -116,6 +117,53 @@ main button {
     background-color: #E5E5E5;
     width: 100%;
     height: calc(667px - 160px);
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    height: calc(667px - 160px);
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.chat li {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.chat strong {
+    font-weight: bold;
+}
+
+.status {
+    width: 100%;
+    min-height: 40px;
+    background-color: #DCDCDC;
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
+
+.message {
+    width: 100%;
+    min-height: 40px;
+    background-color: #FFFFFF;
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
+
+.timer {
+    color: #AAAAAA;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.chat p {
+    word-break: break-all;
 }
 
 footer {
