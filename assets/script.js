@@ -200,6 +200,9 @@ function send(sendMessage) {
   );
   promise.then(recarregaChat);
   promise.catch(sendMessageError);
+
+  document.querySelector("footer input").value;
+  document.querySelector("footer input").value = "";
 }
 // function sendMessageResponse(response) {
   
