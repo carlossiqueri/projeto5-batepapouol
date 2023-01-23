@@ -116,7 +116,7 @@ function showServerMessages() {
   chat.innerHTML = "";
   for (let i = 0; i < messages.length; i++) {
     let from = messages[i].from;
-    let to = messages[i].to = 'Todos';
+    let to = messages[i].to;
     let text = messages[i].text;
     let type = messages[i].type;
     let time = messages[i].time;
