@@ -139,6 +139,13 @@ function showServerMessages() {
         `;
 
       chat.innerHTML += template;
+    }else if(type === 'private_message'){
+      `
+        <li class="private_message" data-test="message"><p>
+         <span class="timer">(${time})</span> &nbsp <strong>${from}</strong>&nbsp para&nbsp <strong>${to}</strong>:&nbsp ${text}
+         </p>
+         </li>
+        `;
     }
   }
   chat.lastElementChild.scrollIntoView();
@@ -198,6 +205,7 @@ function send(sendMessage) {
 function sendMessageResponse(response) {
   getMessages();
   showServerMessages();
+  
 }
 
 function sendMessageError(error) {

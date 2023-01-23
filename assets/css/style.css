@@ -156,6 +156,14 @@ main button {
   margin-bottom: 5px;
 }
 
+.private_message {
+    width: 100%;
+    min-height: 40px;
+    background-color: #FFDEDE;
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
+
 .timer {
   color: #aaaaaa;
   font-size: 14px;
