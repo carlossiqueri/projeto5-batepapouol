@@ -62,6 +62,7 @@ function verifyLogin() {
 
 function loginStatusResponse(response) {
   console.log(response.data);
+  getMessages();
 }
 
 function loginStatusError(erro) {
@@ -142,7 +143,6 @@ function showServerMessages() {
   }
   chat.lastElementChild.scrollIntoView();
 }
-getMessages();
 
 function recarregaChat() {
   getMessages();
